@@ -177,11 +177,11 @@ if "load_state" in st.session_state and st.session_state.load_state:
         opreation = predict_word('./recording_2.png')
         second_num =predict_word('./recording_3.png')
         if opreation == 'plus':
-            print(f"{first_num} + {second_num} = {first_num + second_num})
+            print(f"{first_num} + {second_num} = {first_num + second_num}")
         elif opreation == 'times':
-            print(f"{first_num} * {second_num} = {first_num * second_num})
+            print(f"{first_num} * {second_num} = {first_num * second_num}")
         elif opreation == 'divided_by':
-            print(f"{first_num} / {second_num} = {first_num / second_num})
+            print(f"{first_num} / {second_num} = {first_num / second_num}")
         elif opreation == 'minus':
-            print(f"{first_num} - {second_num} = {first_num - second_num})
+            print(f"{first_num} - {second_num} = {first_num - second_num}")
         
