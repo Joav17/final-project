@@ -81,7 +81,7 @@ def predict_word(spect_path):
     input_image = tf.image.convert_image_dtype(resized_image, tf.float32)
     input_image = tf.expand_dims(input_image, axis=0)
     prediction = model.predict(input_image)
-    st.write(predcition)
+    print(prediction)
     max_value = max(prediction)
     st.write(max_value)
     return np.argmax(prediction)
@@ -131,7 +131,7 @@ if "load_state" in st.session_state and st.session_state.load_state:
     with c2:
         st.header("Play the operation (+, -, *, /)")
         data, sr = librosa.load('./recording_2.wav')
-        st.audio(data, sample_rate=RATE)
+        st.audio(data, sample_rate=sr)
         if st.button('Present spectrogram 2 and output'):
             spectrogram,fig = plot_spectrogram('./recording_2.wav')
             st.pyplot(fig)
