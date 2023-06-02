@@ -32,13 +32,6 @@ def record_audio(duration):
     stream.close()
     p.terminate()
 
-    # wave_file = wave.open(output_name, 'wb')
-    # wave_file.setnchannels(CHANNELS)
-    # wave_file.setsampwidth(p.get_sample_size(FORMAT))
-    # wave_file.setframerate(RATE)
-    # wave_file.writeframes(b''.join(frames))
-    # wave_file.close()
-
     return np.frombuffer(b''.join(frames), dtype=np.int16)
 
 
@@ -138,8 +131,7 @@ if st.button("Execute Function") and not st.session_state.load_state:
 #             recordings.append(data)
 
 #             # Add a button to play the recording
-#             if st.button(f"record again {i + 1}"):
-#                 play_audio(data)
+#            
         st.session_state.load_state = True
 
 c1, c2, c3 = st.columns(3)
