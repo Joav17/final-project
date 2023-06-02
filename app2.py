@@ -8,6 +8,7 @@ import librosa.display
 import PIL.Image
 from matplotlib import pyplot as plt
 from tensorflow import keras
+import tensorflow as tf
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
