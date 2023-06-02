@@ -130,7 +130,7 @@ if "load_state" in st.session_state and st.session_state.load_state:
     # Record the operation
     with c2:
         st.header("Play the operation (+, -, *, /)")
-        data, sr = librosa.load('./recording_1.wav')
+        data, sr = librosa.load('./recording_2.wav')
         st.audio(data, sample_rate=RATE)
         if st.button('Present spectrogram 2 and output'):
             spectrogram,fig = plot_spectrogram('./recording_2.wav')
@@ -140,7 +140,7 @@ if "load_state" in st.session_state and st.session_state.load_state:
     # Record the second number
     with c3:
         st.header("Play the second digit")
-        data, sr = librosa.load('./recording_1.wav')
+        data, sr = librosa.load('./recording_3.wav')
         st.audio(data, sample_rate=RATE)
         if st.button('Present spectrogram 3 and output'):
             spectrogram,fig = plot_spectrogram('./recording_3.wav')
