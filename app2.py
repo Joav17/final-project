@@ -139,6 +139,7 @@ c1, c2, c3 = st.columns(3)
 #     pass
 # Record the first number
 if "load_state" in st.session_state and st.session_state.load_state:
+    
     with c1:
         st.header("Play the first digit")
         data, sr = librosa.load('./recording_1.wav')
@@ -171,10 +172,16 @@ if "load_state" in st.session_state and st.session_state.load_state:
 
 
     # Play back the recordings
-    if st.button("Play back recordings"):
-        data1, sr = librosa.load('./recording_1.wav')
-        data2, sr = librosa.load('./recording_2.wav')
-        data3, sr = librosa.load('./recording_3.wav')
-        play_audio(data1)
-        play_audio(data2)
-        play_audio(data3)
+    if st.button("Calulation"):
+        first_num = predict_word('./recording_1.png')
+        opreation = predict_word('./recording_2.png')
+        second_num =predict_word('./recording_3.png')
+        if opreation == 'plus':
+            print(f"{first_num} + {second_num} = {first_num + second_num})
+        elif opreation == 'times':
+            print(f"{first_num} * {second_num} = {first_num * second_num})
+        elif opreation == 'divided_by':
+            print(f"{first_num} / {second_num} = {first_num / second_num})
+        elif opreation == 'minus':
+            print(f"{first_num} - {second_num} = {first_num - second_num})
+        
