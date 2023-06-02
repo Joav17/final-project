@@ -155,7 +155,7 @@ if "load_state" in st.session_state and st.session_state.load_state:
         if st.button('Present spectrogram 1'):
             spectrogram,fig = plot_spectrogram('./recording_1.wav')
             st.pyplot(fig)
-            print(predict_word('./recording_1.png'))
+            st.write(predict_word('./recording_1.png'))
             #st.write(predict_word(spectrogram))
 
     # Record the operation
