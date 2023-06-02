@@ -85,10 +85,10 @@ st.title("Audio Calculator")
 # model = keras.models.load_model('trained_model.h5')
 def predict_word(spect_path):
     model = keras.models.load_model('trained_model.h5')
-    image = PIL.Image.open(spect_path)
+    image = PIL.Image.open(spect_path).convert('RGB')
     resized_image = image.resize((256, 256))
     input_image = tf.image.convert_image_dtype(resized_image, tf.float32)
-    st.write(input_image.shape)
+    input_image = tf.expand_dims(input_image, axis=0)
     prediction = model.predict(input_image)
     max_value = max(prediction)
     predicted_class = [i for i,x in enumerate(prediction) if x == max_value]
