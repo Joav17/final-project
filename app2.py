@@ -91,8 +91,7 @@ def predict_word(spect_path):
     input_image = tf.expand_dims(input_image, axis=0)
     prediction = model.predict(input_image)
     max_value = max(prediction)
-    predicted_class = [i for i,x in enumerate(prediction) if x == max_value]
-    return predicted_class
+    return np.argmax(prediction)
 
 # Record three times
 def rec_3_times():
