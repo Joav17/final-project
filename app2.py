@@ -88,7 +88,7 @@ def predict_word(spect_path):
     image = PIL.Image.open(spect_path)
     resized_image = image.resize((256, 256))
     input_image = tf.image.convert_image_dtype(resized_image, tf.float32)
-    input_image = tf.expand_dims(input_image, axis=0)
+    st.write(input_image.shape)
     prediction = model.predict(input_image)
     max_value = max(prediction)
     predicted_class = [i for i,x in enumerate(prediction) if x == max_value]
