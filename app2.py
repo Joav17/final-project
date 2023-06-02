@@ -31,7 +31,6 @@ def record_audio(duration):
     stream.stop_stream()
     stream.close()
     p.terminate()
-
     return np.frombuffer(b''.join(frames), dtype=np.int16)
 
 
@@ -63,12 +62,11 @@ def plot_spectrogram(rec_name):
     fig = plt.figure(figsize=(10, 4))
     S = librosa.feature.melspectrogram(y=y, sr=sr,n_mels=256,hop_length=256)
     spec_db = librosa.power_to_db(S, ref=np.max)
-
     librosa.display.specshow(spec_db,
                              y_axis='mel', fmax=8000, x_axis='time')
     plt.tight_layout()
-    # spec_scaled = (spec_db + 80) / 80  # Scale between 0 and 1
-    # spec_resized = np.resize(spec_scaled, (256, 256))  # Resize to match the model input shape
+    # scaling
+    spec_scaled = (spec_db + 80) / 80
     cur = rec_name.split('/')[1]
     print(cur)
     plt.savefig(f"{cur.split('.')[0]}.png")
@@ -83,29 +81,10 @@ def predict_word(spect_path):
     input_image = tf.image.convert_image_dtype(resized_image, tf.float32)
     input_image = tf.expand_dims(input_image, axis=0)
     prediction = model.predict(input_image)
+    st.write(predcition)
     max_value = max(prediction)
+    st.write(max_value)
     return np.argmax(prediction)
-
-# Record three times
-def rec_3_times():
-    global recordings
-    for i in range(3):
-        st.write(f"Recording {i + 1}...")
-        data = record_audio(duration=5)
-        st.write("Finished recording.")
-
-        # Save the recording to a WAV file
-        filename = f"recording_{i + 1}.wav"
-        with wave.open(filename, 'wb') as wf:
-            wf.setnchannels(CHANNELS)
-            wf.setsampwidth(p.get_sample_size(FORMAT))
-            wf.setframerate(RATE)
-            wf.writeframes(data.tobytes())
-
-        # Append the recording to the list
-        recordings.append(data)
-
-        # Add a button to play the recording
 
 if "load_state" not in st.session_state:
      st.session_state.load_state = False
@@ -113,7 +92,7 @@ if "load_state" not in st.session_state:
 if st.button("Record") and not st.session_state.load_state:
         recordings = []
 
-        # Call the function
+        # Recording three times
 #         for i in range(3):
 #             st.write(f"Recording {i + 1}...")
 #             data = record_audio(duration=5)
@@ -130,14 +109,12 @@ if st.button("Record") and not st.session_state.load_state:
 #             # Append the recording to the list
 #             recordings.append(data)
 
-#             # Add a button to play the recording
 #            
+        # recorded once, and therefore updating the state
         st.session_state.load_state = True
 
 c1, c2, c3 = st.columns(3)
-# if st.button("Execute Function") and not st.session_state.load_state:
-#     pass
-# Record the first number
+
 if "load_state" in st.session_state and st.session_state.load_state:
     
     with c1:
