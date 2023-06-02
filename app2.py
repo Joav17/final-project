@@ -110,7 +110,7 @@ def rec_3_times():
 if "load_state" not in st.session_state:
      st.session_state.load_state = False
 
-if st.button("Execute Function") and not st.session_state.load_state:
+if st.button("Record") and not st.session_state.load_state:
         recordings = []
 
         # Call the function
@@ -143,7 +143,7 @@ if "load_state" in st.session_state and st.session_state.load_state:
         st.header("Play the first digit")
         data, sr = librosa.load('./recording_1.wav')
         st.audio(data, sample_rate=RATE)
-        if st.button('Present spectrogram 1'):
+        if st.button('Present spectrogram 1 and output'):
             spectrogram,fig = plot_spectrogram('./recording_1.wav')
             st.pyplot(fig)
             st.write(predict_word('./recording_1.png'))
@@ -154,20 +154,20 @@ if "load_state" in st.session_state and st.session_state.load_state:
         st.header("Play the operation (+, -, *, /)")
         data, sr = librosa.load('./recording_1.wav')
         st.audio(data, sample_rate=RATE)
-        if st.button('Present spectrogram 2'):
-            plot_spectrogram('./recording_2.wav')
-
-            st.pyplot()
+        if st.button('Present spectrogram 2 and output'):
+            spectrogram,fig = plot_spectrogram('./recording_2.wav')
+            st.pyplot(fig)
+            st.write(predict_word('./recording_1.png'))
             #st.write(predict_word(spectrogram))
     # Record the second number
     with c3:
         st.header("Play the second digit")
         data, sr = librosa.load('./recording_1.wav')
         st.audio(data, sample_rate=RATE)
-        if st.button('Present spectrogram 3'):
-            plot_spectrogram('recording_3.wav')
-            st.pyplot()
-            #st.write(predict_word(spectrogram))
+        if st.button('Present spectrogram 3 and output'):
+            spectrogram,fig = plot_spectrogram('./recording_3.wav')
+            st.pyplot(fig)
+            st.write(predict_word('./recording_1.png'))
 
 
     # Play back the recordings
